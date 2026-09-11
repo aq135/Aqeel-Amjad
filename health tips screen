@@ -1,0 +1,100 @@
+import 'package:flutter/material.dart';
+import '../models/health_tip_model.dart';
+
+class HealthTipsScreen extends StatelessWidget {
+  const HealthTipsScreen({super.key});
+
+  final List<HealthTipModel> _tips = const [
+    HealthTipModel(
+      title: 'Stay Hydrated',
+      description: 'Drink an extra 16 ounces (two full glasses) of water or fluids before your blood donation.',
+      category: 'Before Donation',
+    ),
+    HealthTipModel(
+      title: 'Eat Iron-Rich Foods',
+      description: 'Include spinach, red meat, fish, beans, or iron-fortified cereals in your meals days prior.',
+      category: 'Diet',
+    ),
+    HealthTipModel(
+      title: 'Get a Good Night’s Sleep',
+      description: 'Make sure you get at least 7 to 8 hours of quality sleep the night before your appointment.',
+      category: 'Preparation',
+    ),
+    HealthTipModel(
+      title: 'Avoid Fatty Foods',
+      description: 'Do not eat heavy, greasy, or fatty foods right before donating, as it can affect blood tests.',
+      category: 'Before Donation',
+    ),
+    HealthTipModel(
+      title: 'Rest & Refresh',
+      description: 'Relax in the refreshment area for 10-15 minutes after donating. Enjoy a snack and juice.',
+      category: 'After Donation',
+    ),
+    HealthTipModel(
+      title: 'Keep the Bandage On',
+      description: 'Keep the strip bandage on your arm for the next few hours and avoid heavy lifting with that arm.',
+      category: 'After Donation',
+    ),
+  ];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Health & Donation Tips')),
+      body: ListView.builder(
+        padding: const EdgeInsets.all(12.0),
+        itemCount: _tips.length,
+        itemBuilder: (context, index) {
+          final tip = _tips[index];
+          return Card(
+            margin: const EdgeInsets.only(bottom: 12),
+            elevation: 1,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Expanded(
+                        child: Text(
+                          tip.title,
+                          style: const TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.red,
+                          ),
+                        ),
+                      ),
+                      Chip(
+                        label: Text(
+                          tip.category,
+                          style: const TextStyle(fontSize: 11),
+                        ),
+                        backgroundColor: Colors.red.shade50,
+                        labelStyle: TextStyle(color: Colors.red.shade700),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    tip.description,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: Colors.grey.shade700,
+                      height: 1.3,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
+      ),
+    );
+  }
+}
