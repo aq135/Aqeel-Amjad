@@ -1,0 +1,101 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../models/camp_model.dart';
+import '../providers/camp_provider.dart';
+
+class CampDetailScreen extends StatefulWidget {
+  final CampModel camp;
+  const CampDetailScreen({super.key, required this.camp});
+
+  @override
+  State<CampDetailScreen> createState() => _CampDetailScreenState();
+}
+
+class _CampDetailScreenState extends State<CampDetailScreen> {
+  String? _selectedSlot;
+  final List<String> _slots = ['09:00 AM', '10:00 AM', '11:00 AM', '12:00 PM'];
+
+  void _bookSlot() {
+    if (_selectedSlot == null) return;
+    Provider.of<CampProvider>(context, listen: false).bookSlot(widget.camp, _selectedSlot!);
+    
+    showDialog(
+      context: context,
+      builder: (_) => AlertDialog(
+        title: const Text('Booking Confirmed'),
+        content: Text('Your slot for ${widget.camp.title} at $_selectedSlot has been booked successfully.'),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context); // close dialog
+              Navigator.pop(context); // back to list
+            },
+            child: const Text('OK'),
+          )
+        ],
+      ),
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: Text(widget.camp.title)),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(
+              widget.camp.title,
+              style: const TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 8),
+            Row(children: [
+              const Icon(Icons.location_on, color: Colors.red),
+              const SizedBox(width: 8),
+              Expanded(child: Text(widget.camp.location, style: const TextStyle(fontSize: 15))),
+            ]),
+            const SizedBox(height: 8),
+            Row(children: [
+              const Icon(Icons.calendar_today, color: Colors.grey),
+              const SizedBox(width: 8),
+              Text('${widget.camp.date} | ${widget.camp.time}', style: const TextStyle(fontSize: 15)),
+            ]),
+            const Divider(height: 32),
+            const Text(
+              'Select Donation Time Slot',
+              style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+            ),
+            const SizedBox(height: 12),
+            Wrap(
+              spacing: 8,
+              children: _slots.map((slot) {
+                return ChoiceChip(
+                  label: Text(slot),
+                  selected: _selectedSlot == slot,
+                  onSelected: (selected) {
+                    setState(() => _selectedSlot = selected ? slot : null);
+                  },
+                );
+              }).toList(),
+            ),
+            const SizedBox(height: 32),
+            SizedBox(
+              width: double.infinity,
+              height: 50,
+              child: ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: Colors.red,
+                  foregroundColor: Colors.white,
+                ),
+                onPressed: _selectedSlot == null ? null : _bookSlot,
+                child: const Text('Book Slot Now', style: TextStyle(fontSize: 16)),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
