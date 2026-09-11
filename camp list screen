@@ -1,0 +1,111 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/camp_provider.dart';
+import 'camp_detail_screen.dart';
+
+class CampListScreen extends StatefulWidget {
+  const CampListScreen({super.key});
+
+  @override
+  State<CampListScreen> createState() => _CampListScreenState();
+}
+
+class _CampListScreenState extends State<CampListScreen> {
+  String _searchQuery = '';
+  String _selectedFilter = 'All';
+
+  @override
+  Widget build(BuildContext context) {
+    final campProvider = Provider.of<CampProvider>(context);
+    final filteredCamps = campProvider.camps.where((camp) {
+      final matchesSearch = camp.title.toLowerCase().contains(_searchQuery.toLowerCase()) ||
+          camp.location.toLowerCase().contains(_searchQuery.toLowerCase());
+      if (_selectedFilter == 'All') return matchesSearch;
+      return matchesSearch && camp.bloodGroupNeeded == _selectedFilter;
+    }).toList();
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('Donation Camps')),
+      body: Column(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(12.0),
+            child: TextField(
+              onChanged: (val) => setState(() => _searchQuery = val),
+              decoration: const InputDecoration(
+                hintText: 'Search by camp name or location...',
+                prefixIcon: Icon(Icons.search),
+                border: OutlineInputBorder(),
+                isDense: true,
+              ),
+            ),
+          ),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            padding: const EdgeInsets.symmetric(horizontal: 12),
+            child: Row(
+              children: ['All', 'A+', 'B+', 'O-'].map((filter) {
+                return Padding(
+                  padding: const EdgeInsets.only(right: 8.0),
+                  child: ChoiceChip(
+                    label: Text(filter),
+                    selected: _selectedFilter == filter,
+                    onSelected: (selected) {
+                      setState(() => _selectedFilter = filter);
+                    },
+                  ),
+                );
+              }).toList(),
+            ),
+          ),
+          const SizedBox(height: 8),
+          Expanded(
+            child: filteredCamps.isEmpty
+                ? const Center(child: Text('No camps found'))
+                : ListView.builder(
+                    itemCount: filteredCamps.length,
+                    itemBuilder: (context, index) {
+                      final camp = filteredCamps[index];
+                      return Card(
+                        margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                        child: ListTile(
+                          title: Text(camp.title, style: const TextStyle(fontWeight: FontWeight.bold)),
+                          subtitle: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 4),
+                              Row(children: [
+                                const Icon(Icons.location_on, size: 14, color: Colors.grey),
+                                const SizedBox(width: 4),
+                                Text(camp.location),
+                              ]),
+                              const SizedBox(height: 2),
+                              Row(children: [
+                                const Icon(Icons.calendar_today, size: 14, color: Colors.grey),
+                                const SizedBox(width: 4),
+                                Text('${camp.date} • ${camp.time}'),
+                              ]),
+                            ],
+                          ),
+                          trailing: Chip(
+                            label: Text('Slots: ${camp.availableSlots}', style: const TextStyle(fontSize: 11)),
+                            backgroundColor: Colors.red.shade50,
+                          ),
+                          onTap: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => CampDetailScreen(camp: camp),
+                              ),
+                            );
+                          },
+                        ),
+                      );
+                    },
+                  ),
+          ),
+        ],
+      ),
+    );
+  }
+}
