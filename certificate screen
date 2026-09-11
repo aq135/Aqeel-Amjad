@@ -1,0 +1,70 @@
+import 'package:flutter/material.dart';
+import '../models/booking_model.dart';
+
+class CertificateScreen extends StatelessWidget {
+  final BookingModel booking;
+  const CertificateScreen({super.key, required this.booking});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Donation Certificate')),
+      body: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Container(
+            padding: const EdgeInsets.all(24),
+            decoration: BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.circular(16),
+              border: Border.all(color: Colors.red.shade200, width: 2),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.grey.shade300,
+                  blurRadius: 10,
+                  spreadRadius: 2,
+                )
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Icon(Icons.favorite, size: 50, color: Colors.red),
+                const SizedBox(height: 12),
+                const Text(
+                  'Certificate of Appreciation',
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold, color: Colors.red),
+                  textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  'This is proudly presented to',
+                  style: TextStyle(color: Colors.grey),
+                ),
+                const SizedBox(height: 8),
+                const Text(
+                  'Valued Donor',
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(height: 12),
+                Text(
+                  'For successfully donating blood at ${booking.camp.title}.\nThank you for saving lives!',
+                  textAlign: TextAlign.center,
+                  style: const TextStyle(fontSize: 14),
+                ),
+                const SizedBox(height: 24),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text('Cert ID: ${booking.certificateId ?? 'N/A'}', style: const TextStyle(fontSize: 12, color: Colors.grey)),
+                    const Text('Signed: BloodBank HQ', style: TextStyle(fontSize: 12, fontWeight: FontWeight.bold)),
+                  ],
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
