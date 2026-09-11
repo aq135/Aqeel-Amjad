@@ -1,0 +1,85 @@
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../providers/camp_provider.dart';
+import 'certificate_screen.dart';
+
+class MyBookingsScreen extends StatelessWidget {
+  const MyBookingsScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final bookings = Provider.of<CampProvider>(context).bookings;
+
+    return Scaffold(
+      appBar: AppBar(title: const Text('My Bookings & History')),
+      body: bookings.isEmpty
+          ? const Center(child: Text('No bookings found'))
+          : ListView.builder(
+              itemCount: bookings.length,
+              itemBuilder: (context, index) {
+                final booking = bookings[index];
+                final isCompleted = booking.status == 'Completed';
+
+                return Card(
+                  margin: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              booking.camp.title,
+                              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                            ),
+                            Chip(
+                              label: Text(booking.status, style: const TextStyle(fontSize: 11)),
+                              backgroundColor: isCompleted ? Colors.green.shade50 : Colors.blue.shade50,
+                              labelStyle: TextStyle(
+                                color: isCompleted ? Colors.green.shade700 : Colors.blue.shade700,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 4),
+                        Text('Location: ${booking.camp.location}', style: const TextStyle(color: Colors.grey)),
+                        Text('Time Slot: ${booking.slotTime}', style: const TextStyle(color: Colors.grey)),
+                        const Divider(height: 20),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            if (isCompleted)
+                              OutlinedButton.icon(
+                                icon: const Icon(Icons.card_membership, size: 18),
+                                label: const Text('View Certificate'),
+                                onPressed: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => CertificateScreen(booking: booking),
+                                    ),
+                                  );
+                                },
+                              )
+                            else
+                              TextButton(
+                                style: TextButton.styleFrom(foregroundColor: Colors.red),
+                                onPressed: () {
+                                  Provider.of<CampProvider>(context, listen: false)
+                                      .cancelBooking(booking.id);
+                                },
+                                child: const Text('Cancel Booking'),
+                              ),
+                          ],
+                        )
+                      ],
+                    ),
+                  ),
+                );
+              },
+            ),
+    );
+  }
+}
