@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aqeel Amjad - Portfolio</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header / Navbar -->
+    <header class="navbar">
+        <div class="logo">Aqeel<span>.</span></div>
+        <nav>
+            <ul>
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#certificates">Certificates</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-text">
+            <h3>Hello, It's Me</h3>
+            <h1>Aqeel Amjad</h1>
+            <h3>And I'm a <span class="highlight">Software & Web Developer</span></h3>
+            <p>I specialize in C++ programming, Database Management Systems, Object-Oriented Programming, and Web Development.</p>
+            <div class="social-icons">
+                <!-- GitHub Link added -->
+                <a href="https://github.com/muhammad-ibrahim-dev-44" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" target="_blank" title="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="tel:03191704043" title="Phone"><i class="fas fa-phone"></i></a>
+                <a href="https://wa.me/923191704043" target="_blank" title="WhatsApp"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <a href="#contact" class="btn">Contact Me</a>
+        </div>
+        <div class="hero-img">
+            <div class="img-box">
+                <!-- Replace with your image -->
+                <img src="https://via.placeholder.com/300" alt="Aqeel Amjad">
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <h2 class="heading">About <span>Me</span></h2>
+        <div class="about-content">
+            <p>I am a passionate Computer Science student and Developer with strong expertise in C++ (OOP & Data Structures), Relational Database Management Systems (SQL), and Web Technologies. I enjoy solving complex logic problems, optimizing memory management, and designing responsive web projects.</p>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="skills">
+        <h2 class="heading">My <span>Skills</span></h2>
+        <div class="skills-container">
+            <div class="skill-card">
+                <i class="fas fa-code"></i>
+                <h3>C++ & OOP</h3>
+                <p>Inheritance, Polymorphism, Dynamic Memory, Templates</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-database"></i>
+                <h3>DBMS & SQL</h3>
+                <p>Relational Databases, Queries, Normalization, Joins</p>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-html5"></i>
+                <h3>HTML5 & CSS3</h3>
+                <p>Responsive Layouts, Flexbox, CSS Grid</p>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-js"></i>
+                <h3>JavaScript</h3>
+                <p>DOM Manipulation, ES6 Features, Logic Implementation</p>
+            </div>
+            <div class="skill-card">
+                <i class="fas fa-file-code"></i>
+                <h3>File Handling</h3>
+                <p>Binary/Text File Input Output, Data Persistence</p>
+            </div>
+            <div class="skill-card">
+                <i class="fab fa-git-alt"></i>
+                <h3>Git & GitHub</h3>
+                <p>Version Control, Repository Management</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Certificates Section -->
+    <section id="certificates" class="certificates">
+        <h2 class="heading">My <span>Certificates</span></h2>
+        <div class="certificates-container">
+            
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+                <h3>C++ Programming Certificate</h3>
+                <p>Certification in C++ Fundamental Programming & Object-Oriented Concepts.</p>
+                <a href="#" target="_blank" class="btn-sm"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+                <h3>Database Management Systems</h3>
+                <p>Relational Databases, SQL Queries, and Data Structuring Certification.</p>
+                <a href="#" target="_blank" class="btn-sm"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            </div>
+
+            <div class="cert-card">
+                <div class="cert-icon"><i class="fas fa-certificate"></i></div>
+                <h3>Web Development Fundamentals</h3>
+                <p>HTML5, CSS3, JavaScript, and Responsive Web Design Certification.</p>
+                <a href="#" target="_blank" class="btn-sm"><i class="fas fa-external-link-alt"></i> View Certificate</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="projects">
+        <h2 class="heading">Featured <span>Projects</span></h2>
+        <div class="projects-container">
+            
+            <div class="project-card">
+                <div class="project-icon"><i class="fas fa-laptop-code"></i></div>
+                <h3>Student Management System</h3>
+                <p>A C++ console application built using Object-Oriented Programming (OOP) principles, file handling for persistent data storage, and dynamic memory allocation.</p>
+                <div class="tags">
+                    <span>C++</span>
+                    <span>OOP</span>
+                    <span>File Handling</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/muhammad-ibrahim-dev-44" target="_blank" class="btn-sm"><i class="fab fa-github"></i> Code</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon"><i class="fas fa-database"></i></div>
+                <h3>Database Management App</h3>
+                <p>A SQL-driven relational database project featuring normalized tables, complex JOIN queries, and transaction management for inventory handling.</p>
+                <div class="tags">
+                    <span>SQL</span>
+                    <span>DBMS</span>
+                    <span>Database Design</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/muhammad-ibrahim-dev-44" target="_blank" class="btn-sm"><i class="fab fa-github"></i> Code</a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-icon"><i class="fas fa-globe"></i></div>
+                <h3>Personal Developer Portfolio</h3>
+                <p>A responsive, modern single-page portfolio website designed using clean HTML5, CSS3, and JavaScript with smooth scroll features.</p>
+                <div class="tags">
+                    <span>HTML5</span>
+                    <span>CSS3</span>
+                    <span>JavaScript</span>
+                </div>
+                <div class="project-links">
+                    <a href="https://github.com/muhammad-ibrahim-dev-44" target="_blank" class="btn-sm"><i class="fab fa-github"></i> Code</a>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <h2 class="heading">Contact <span>Me</span></h2>
+        
+        <div class="contact-info">
+            <div class="info-item">
+                <i class="fas fa-phone-alt"></i>
+                <p><strong>Phone / WhatsApp:</strong> <a href="tel:03191704043">03191704043</a></p>
+            </div>
+            <div class="info-item">
+                <i class="fab fa-github"></i>
+                <p><strong>GitHub Profile:</strong> <a href="https://github.com/muhammad-ibrahim-dev-44" target="_blank">github.com/muhammad-ibrahim-dev-44</a></p>
+            </div>
+        </div>
+
+        <form action="#">
+            <input type="text" placeholder="Full Name" required>
+            <input type="email" placeholder="Email Address" required>
+            <input type="text" placeholder="Subject" required>
+            <textarea placeholder="Your Message" rows="5" required></textarea>
+            <button type="submit" class="btn">Send Message</button>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Aqeel Amjad | All Rights Reserved.</p>
+    </footer>
+
+</body>
+</html>
